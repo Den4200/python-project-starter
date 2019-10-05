@@ -1,2 +1,2 @@
-cd C:\Users\dpham\Desktop\code\python\automation\create-project\
+cd C:\Users\example-user\Desktop\code\python\python-project-starter\
 python main.py

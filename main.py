@@ -14,9 +14,9 @@ class Create:
         self.token = settings.token
         self.default_path = settings.default_path
 
-        self.project_path = self.default_path + self.project_name + '\\'
-        self.env_path = self.project_path + '\\env\\'
-        self.vscode_path = self.project_path + '\\.vscode\\'
+        self.project_path = os.path.join(self.default_path, self.project_name)
+        self.env_path = os.path.join(self.project_path, 'env')
+        self.vscode_path = os.path.join(self.project_path, '.vscode')
 
     def _create_repo(self):
         g = Github(self.token)
@@ -24,7 +24,7 @@ class Create:
 
         user.create_repo(self.project_name)
 
-        subprocess.call(["scripts\\git.bat", self.project_path, self.project_name, self.username])
+        subprocess.call([os.path.join('scripts', 'git.bat'), self.project_path, self.project_name, self.username])
 
     def create(self, YoN):
 
@@ -40,36 +40,44 @@ class Create:
         venv.create(self.env_path)
 
         # Create VS Code settings
-        with open(self.vscode_path + 'settings.json', 'w') as f:
-            f.write("{\n\t\"python.pythonPath\": \"\\env\\scripts\\python.exe\"\n}")
+        with open(os.path.join(self.vscode_path, 'settings.json'), 'w') as f:
+            f.write("{\n\t\"python.pythonPath\": \"" + os.path.join('env', 'scripts', 'python.exe') + "\"\n}")
 
         # Create main.py
-        with open(self.project_path + 'main.py', 'w') as f:
+        with open(os.path.join(self.project_path, 'main.py'), 'w') as f:
+            f.write('')
+
+        # Create __init__.py
+        with open(os.path.join(self.project_path, '__init__.py'), 'w') as f:
             f.write('')
 
         # Create .gitignore
-        with open(self.project_path + ".gitignore", 'w') as f:
+        with open(os.path.join(self.project_path, '.gitignore'), 'w') as f:
             f.write('')
 
         # Create LICENSE
-        with open(self.project_path + "LICENSE", 'w') as f:
+        with open(os.path.join(self.project_path, 'LICENSE'), 'w') as f:
             f.write('')
 
         # Create README.md
-        with open(self.project_path + "README.md", 'w') as f:
+        with open(os.path.join(self.project_path, 'README.md'), 'w') as f:
             f.write('# ' + self.project_name)
 
+        # Create a requirements.txt
+        with open(os.path.join(self.project_path, 'requirements.txt'), 'w') as f:
+            f.write('')
+
         # Create project initializtion script
-        with open(self.project_path + "proj_init.py", 'w') as f:
+        with open(os.path.join(self.project_path, 'proj_init.py'), 'w') as f:
             f.write('')
 
         # Copy over files
-        shutil.copyfile(os.getcwd() + "\\templates\\.gitignore-template", self.project_path + ".gitignore")
-        shutil.copyfile(os.getcwd() + "\\templates\\LICENSE-template", self.project_path + "LICENSE")
-        shutil.copyfile(os.getcwd() + "\\templates\\proj_init-template", self.project_path + "proj_init.py")
+        shutil.copyfile(os.path.join(os.getcwd(), 'templates', '.gitignore-template'), os.path.join(self.project_path, '.gitignore')) 
+        shutil.copyfile(os.path.join(os.getcwd(), 'templates', 'LICENSE-template'), os.path.join(self.project_path, 'LICENSE')) 
+        shutil.copyfile(os.path.join(os.getcwd(), 'templates', 'proj_init-template'), os.path.join(self.project_path, 'proj_init.py')) 
 
         # Execute start_init.py
-        subprocess.call(["scripts\\proj_init.bat", self.project_path])
+        subprocess.call([os.path.join('scripts', 'proj_init.bat'), self.project_path])
 
         if YoN.upper() == 'Y':
             self._create_repo()
