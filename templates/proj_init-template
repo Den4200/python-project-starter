@@ -1,0 +1,8 @@
+import os
+
+cmds = ['git init', 'git add .', 'git commit -m \"Initial commit\"']
+
+for cmd in cmds:
+    os.system(cmd)
+
+os.remove('proj_init.py')
