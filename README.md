@@ -4,7 +4,7 @@ A script to help create new python projects
 * Ask for a project name
 * Create a new folder
 * Create a virtual environment
-* Create an empty main.py, \__init__.py, and requirements.txt
+* Create an empty main.py, \_\_init\_\_.py, and requirements.txt
 * Create a LICENSE, README.md, and .gitignore
 * Initialize a repository
 * Create an initial commit
@@ -22,6 +22,6 @@ A script to help create new python projects
 ## Shortcuts
 In `start-shortcut\create_python_project.bat` change the directory to where this package is installed. You can then move/copy that shortcut to wherever you'd like.
 ## The Road Ahead
-* Adding Linux and Mac OS compatibility
-* Adding docker files
-* Adding a setup.py
+* Add Linux and Mac OS compatibility
+* Add docker files
+* Add a setup.py

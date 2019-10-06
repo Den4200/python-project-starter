@@ -15,6 +15,7 @@ class Create:
         self.default_path = settings.default_path
 
         self.project_path = os.path.join(self.default_path, self.project_name)
+        self.app_path = os.path.join(self.project_path, 'app')
         self.env_path = os.path.join(self.project_path, 'env')
         self.vscode_path = os.path.join(self.project_path, '.vscode')
 
@@ -33,6 +34,7 @@ class Create:
 
         # Create folders
         os.mkdir(self.project_path)
+        os.mkdir(self.app_path)
         os.mkdir(self.env_path)
         os.mkdir(self.vscode_path)
 
@@ -41,14 +43,20 @@ class Create:
 
         # Create VS Code settings
         with open(os.path.join(self.vscode_path, 'settings.json'), 'w') as f:
-            f.write("{\n\t\"python.pythonPath\": \"" + os.path.join('env', 'scripts', 'python.exe') + "\"\n}")
+            e_path = os.path.join('env', 'scripts', 'python.exe')
+
+            if '\\' in e_path:
+                e_path_parts = e_path.split('\\')
+                e_path = e_path_parts[0] + '\\\\' + e_path_parts[1] + '\\\\' + e_path_parts[2]
+
+            f.write("{\n\t\"python.pythonPath\": \"" + e_path + "\"\n}")
 
         # Create main.py
-        with open(os.path.join(self.project_path, 'main.py'), 'w') as f:
+        with open(os.path.join(self.app_path, 'main.py'), 'w') as f:
             f.write('')
 
         # Create __init__.py
-        with open(os.path.join(self.project_path, '__init__.py'), 'w') as f:
+        with open(os.path.join(self.app_path, '__init__.py'), 'w') as f:
             f.write('')
 
         # Create .gitignore
