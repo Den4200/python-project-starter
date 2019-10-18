@@ -1,5 +1,4 @@
 import os
-import venv
 import shutil
 import subprocess
 from github import Github
@@ -37,9 +36,6 @@ class Create:
         os.mkdir(self.app_path)
         os.mkdir(self.env_path)
         os.mkdir(self.vscode_path)
-
-        # Create virtual environment
-        venv.create(self.env_path)
 
         # Create VS Code settings
         with open(os.path.join(self.vscode_path, 'settings.json'), 'w') as f:
