@@ -17,7 +17,7 @@ A script to help create new python projects
 * Clone from the repository
 * Use `pip install -r requirements.txt` to install the required packages
 * Go into `settings.py` to change settings
-* Create a Github Personal Access Token and paste it into `token.key`
+* Create a [Github Personal Access Token](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line) and paste it into `token.key`
 * Add in your license to `templates\LICENSE-template`
 ## Shortcuts
 In `start-shortcut\create_python_project.bat` change the directory to where this package is installed. You can then move/copy that shortcut to wherever you'd like.
